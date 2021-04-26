@@ -1,0 +1,12 @@
+all:
+   vars:
+      ansible_user: 'suporte'
+      ansible_become: 'yes'
+      ansible_become_method: 'sudo'
+      mba: 'Impacta'
+
+local:
+   vars:
+      turma: '04'
+   hosts:
+     127.0.0.1
