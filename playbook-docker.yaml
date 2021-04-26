@@ -38,7 +38,8 @@
   
   - name: construindo a imagem
     docker_image:
-        name: "{{ name_var}}" 
+        name: "{{ name_var}}"
+        tag: "{{ tag }}" 
         source: pull    
 
 
