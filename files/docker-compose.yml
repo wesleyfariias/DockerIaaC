@@ -1,7 +1,9 @@
-version: "3.7"
+version: "3"
 services:
   impacta_app:
-    image: "impacta_app:1.0"
+    image: ${name_var}
+    container_name: impacta_app
+    restart: always
     ports:
       - "5000:5000"
     environment:

@@ -18,11 +18,7 @@
         name: docker
         enabled: yes
         state: started
-       
-  - name: Criando arquivo docker compose
-    template:
-      src:  docker-compose.j2
-      dest: /root/docker-compose.yml   
+          
 
   - name: Copiando artefatos para o servidor
     copy:
@@ -36,15 +32,21 @@
       - app.py
       - requirements.txt
   
-  - name: construindo a imagem
+  - name: construindo a imagem usando extra vars
     docker_image:
-        name: "{{ name_var}}"
-        tag: "{{ tag }}" 
-        source: pull    
-
+        name: "{{ XVAR }}"
+        force_tag: yes 
+        source: build    
+        build:
+        path: /root/
+    register: docker_build
+    tags:
+      - docker-build
 
   - name: Executando o docker-compose
     command: docker-compose up -d
     args:
        chdir: /root/
+    environment:
+       name_var: "{{ name_var }}"   
     register: docker_compose_up
